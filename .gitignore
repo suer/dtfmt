@@ -1,1 +1,3 @@
 /dtfmt
+# Added by goreleaser init:
+dist/
