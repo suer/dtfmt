@@ -26,6 +26,14 @@ func TestRunTimestamp(t *testing.T) {
 	}
 }
 
+func TestRunHelp(t *testing.T) {
+	var stdout, stderr bytes.Buffer
+	code := Run([]string{"-h"}, &stdout, &stderr)
+	if code != 0 {
+		t.Errorf("code = %d, want 0", code)
+	}
+}
+
 func TestRunNoArgs(t *testing.T) {
 	var stdout, stderr bytes.Buffer
 	code := Run([]string{}, &stdout, &stderr)
