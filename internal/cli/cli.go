@@ -17,6 +17,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 	fs.SetOutput(stderr)
 	fs.Usage = func() {
 		_, _ = fmt.Fprintln(stderr, "usage: dtfmt <file-path|unix-timestamp|datetime-string>")
+		fs.PrintDefaults()
 	}
 	var showVersion bool
 	fs.BoolVar(&showVersion, "version", false, "print version")
