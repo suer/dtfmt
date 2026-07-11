@@ -6,24 +6,24 @@ func TestParseUnixTimestamp(t *testing.T) {
 	tests := []struct {
 		name     string
 		in       string
-		wantUnit string
+		wantUnit Unit
 		wantV    int64
 		wantOK   bool
 	}{
-		{"zero", "0", "seconds", 0, true},
-		{"10 digits seconds", "1700000000", "seconds", 1700000000, true},
-		{"boundary 10 digits seconds", "9999999999", "seconds", 9999999999, true},
-		{"boundary 11 digits milliseconds", "10000000000", "milliseconds", 10000000000, true},
-		{"13 digits milliseconds", "1700000000000", "milliseconds", 1700000000000, true},
-		{"boundary 13 digits milliseconds", "9999999999999", "milliseconds", 9999999999999, true},
-		{"boundary 14 digits microseconds", "10000000000000", "microseconds", 10000000000000, true},
-		{"16 digits microseconds", "1700000000000000", "microseconds", 1700000000000000, true},
-		{"boundary 16 digits microseconds", "9999999999999999", "microseconds", 9999999999999999, true},
-		{"boundary 17 digits nanoseconds", "10000000000000000", "nanoseconds", 10000000000000000, true},
-		{"19 digits nanoseconds", "1700000000000000000", "nanoseconds", 1700000000000000000, true},
-		{"negative seconds", "-1700000000", "seconds", -1700000000, true},
-		{"negative zero", "-0", "seconds", 0, true},
-		{"leading zeros normalize digit count", "0001700000000", "seconds", 1700000000, true},
+		{"zero", "0", UnitSeconds, 0, true},
+		{"10 digits seconds", "1700000000", UnitSeconds, 1700000000, true},
+		{"boundary 10 digits seconds", "9999999999", UnitSeconds, 9999999999, true},
+		{"boundary 11 digits milliseconds", "10000000000", UnitMilliseconds, 10000000000, true},
+		{"13 digits milliseconds", "1700000000000", UnitMilliseconds, 1700000000000, true},
+		{"boundary 13 digits milliseconds", "9999999999999", UnitMilliseconds, 9999999999999, true},
+		{"boundary 14 digits microseconds", "10000000000000", UnitMicroseconds, 10000000000000, true},
+		{"16 digits microseconds", "1700000000000000", UnitMicroseconds, 1700000000000000, true},
+		{"boundary 16 digits microseconds", "9999999999999999", UnitMicroseconds, 9999999999999999, true},
+		{"boundary 17 digits nanoseconds", "10000000000000000", UnitNanoseconds, 10000000000000000, true},
+		{"19 digits nanoseconds", "1700000000000000000", UnitNanoseconds, 1700000000000000000, true},
+		{"negative seconds", "-1700000000", UnitSeconds, -1700000000, true},
+		{"negative zero", "-0", UnitSeconds, 0, true},
+		{"leading zeros normalize digit count", "0001700000000", UnitSeconds, 1700000000, true},
 		{"decimal not a timestamp", "12.34", "", 0, false},
 		{"trailing letter not a timestamp", "12a", "", 0, false},
 		{"empty string", "", "", 0, false},

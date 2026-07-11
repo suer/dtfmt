@@ -37,7 +37,7 @@ func TestDetectTimestamp(t *testing.T) {
 	if r.Kind != KindTimestamp {
 		t.Fatalf("Kind = %v, want KindTimestamp", r.Kind)
 	}
-	if r.TimestampUnit != "seconds" {
+	if r.TimestampUnit != UnitSeconds {
 		t.Errorf("TimestampUnit = %q, want seconds", r.TimestampUnit)
 	}
 	if !r.Time.Equal(time.Unix(1700000000, 0)) {

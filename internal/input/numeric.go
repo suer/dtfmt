@@ -5,9 +5,18 @@ import (
 	"strconv"
 )
 
+type Unit string
+
+const (
+	UnitSeconds      Unit = "seconds"
+	UnitMilliseconds Unit = "milliseconds"
+	UnitMicroseconds Unit = "microseconds"
+	UnitNanoseconds  Unit = "nanoseconds"
+)
+
 var numericRe = regexp.MustCompile(`^-?[0-9]+$`)
 
-func parseUnixTimestamp(s string) (unit string, v int64, ok bool) {
+func parseUnixTimestamp(s string) (unit Unit, v int64, ok bool) {
 	if !numericRe.MatchString(s) {
 		return "", 0, false
 	}
@@ -24,13 +33,13 @@ func parseUnixTimestamp(s string) (unit string, v int64, ok bool) {
 
 	switch {
 	case digits <= 10:
-		unit = "seconds"
+		unit = UnitSeconds
 	case digits <= 13:
-		unit = "milliseconds"
+		unit = UnitMilliseconds
 	case digits <= 16:
-		unit = "microseconds"
+		unit = UnitMicroseconds
 	default:
-		unit = "nanoseconds"
+		unit = UnitNanoseconds
 	}
 	return unit, v, true
 }

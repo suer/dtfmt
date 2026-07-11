@@ -21,7 +21,7 @@ type Result struct {
 	Path          string
 	FileInfo      os.FileInfo
 	Time          time.Time
-	TimestampUnit string
+	TimestampUnit Unit
 }
 
 func Detect(arg string) (Result, error) {
@@ -45,15 +45,17 @@ func Detect(arg string) (Result, error) {
 	return Result{Kind: KindDatetime, Time: t}, nil
 }
 
-func unixToTime(v int64, unit string) time.Time {
+func unixToTime(v int64, unit Unit) time.Time {
 	switch unit {
-	case "seconds":
+	case UnitSeconds:
 		return time.Unix(v, 0)
-	case "milliseconds":
+	case UnitMilliseconds:
 		return time.UnixMilli(v)
-	case "microseconds":
+	case UnitMicroseconds:
 		return time.UnixMicro(v)
-	default:
+	case UnitNanoseconds:
 		return time.Unix(0, v)
+	default:
+		panic(fmt.Sprintf("unknown timestamp unit %q", unit))
 	}
 }
