@@ -48,7 +48,7 @@ func Build(arg string, r input.Result) Document {
 
 	case input.KindTimestamp:
 		return Document{
-			Input: InputInfo{Type: "timestamp", Value: arg, Unit: r.TimestampUnit},
+			Input: InputInfo{Type: "timestamp", Value: arg, Unit: string(r.TimestampUnit)},
 			Times: &ValueTimes{Value: format.Build(r.Time)},
 		}
 
