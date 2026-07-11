@@ -16,9 +16,6 @@ const (
 	KindDatetime
 )
 
-// Result describes a detected input. Which fields are populated depends on
-// Kind: KindFile populates Path and FileInfo; KindTimestamp and KindDatetime
-// populate Time instead (KindTimestamp also sets TimestampUnit).
 type Result struct {
 	Kind          Kind
 	Path          string

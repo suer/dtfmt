@@ -26,9 +26,7 @@ type ValueTimes struct {
 }
 
 type Document struct {
-	Input InputInfo `json:"input"`
-	// Times holds *FileTimes for KindFile input, or *ValueTimes for
-	// KindTimestamp/KindDatetime input.
+	Input InputInfo   `json:"input"`
 	Times interface{} `json:"times"`
 }
 
