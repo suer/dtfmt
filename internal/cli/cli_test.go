@@ -26,6 +26,19 @@ func TestRunTimestamp(t *testing.T) {
 	}
 }
 
+func TestRunVersion(t *testing.T) {
+	for _, flag := range []string{"--version", "-v"} {
+		var stdout, stderr bytes.Buffer
+		code := Run([]string{flag}, &stdout, &stderr)
+		if code != 0 {
+			t.Errorf("%s: code = %d, want 0, stderr = %s", flag, code, stderr.String())
+		}
+		if !bytes.HasPrefix(stdout.Bytes(), []byte("dtfmt ")) {
+			t.Errorf("%s: stdout = %q, want prefix %q", flag, stdout.String(), "dtfmt ")
+		}
+	}
+}
+
 func TestRunHelp(t *testing.T) {
 	var stdout, stderr bytes.Buffer
 	code := Run([]string{"-h"}, &stdout, &stderr)
