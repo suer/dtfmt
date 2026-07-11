@@ -79,11 +79,11 @@ $ dtfmt "2023-11-15 09:00:00"
 ## Build
 
 ```bash
-$ go build
+$ mise run build
 ```
 
 ## Test
 
 ```bash
-$ go test ./...
+$ mise run test
 ```
