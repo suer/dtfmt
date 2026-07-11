@@ -65,7 +65,6 @@ func TestBuildFileKeyOrderAndNullHandling(t *testing.T) {
 	if !ok {
 		t.Fatalf("Times = %T, want *FileTimes", doc.Times)
 	}
-	_ = ft
 
 	b, err := json.Marshal(doc.Times)
 	if err != nil {

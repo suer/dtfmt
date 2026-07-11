@@ -36,11 +36,19 @@ func TestBuildUnixNanoOverflow(t *testing.T) {
 }
 
 func TestBuildNamedTimezones(t *testing.T) {
+	loc, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		t.Skipf("Asia/Tokyo zoneinfo not available: %v", err)
+	}
+	origLocal := time.Local
+	time.Local = loc
+	t.Cleanup(func() { time.Local = origLocal })
+
 	jst := time.FixedZone("JST", 9*3600)
 	tm := time.Date(2023, 11, 15, 15, 13, 20, 0, jst)
 	f := Build(tm)
 
-	wantLocal := tm.Local().Format(time.RFC3339)
+	wantLocal := "2023-11-15T15:13:20+09:00"
 	if f.Local.RFC3339 != wantLocal {
 		t.Errorf("Local.RFC3339 = %q, want %q", f.Local.RFC3339, wantLocal)
 	}

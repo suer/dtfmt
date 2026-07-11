@@ -1,6 +1,8 @@
 package output
 
 import (
+	"fmt"
+
 	"github.com/suer/dtfmt/internal/filetime"
 	"github.com/suer/dtfmt/internal/format"
 	"github.com/suer/dtfmt/internal/input"
@@ -24,7 +26,9 @@ type ValueTimes struct {
 }
 
 type Document struct {
-	Input InputInfo   `json:"input"`
+	Input InputInfo `json:"input"`
+	// Times holds *FileTimes for KindFile input, or *ValueTimes for
+	// KindTimestamp/KindDatetime input.
 	Times interface{} `json:"times"`
 }
 
@@ -52,10 +56,13 @@ func Build(arg string, r input.Result) Document {
 			Times: &ValueTimes{Value: format.Build(r.Time)},
 		}
 
-	default:
+	case input.KindDatetime:
 		return Document{
 			Input: InputInfo{Type: "datetime", Value: arg},
 			Times: &ValueTimes{Value: format.Build(r.Time)},
 		}
+
+	default:
+		panic(fmt.Sprintf("unknown input kind %v", r.Kind))
 	}
 }
