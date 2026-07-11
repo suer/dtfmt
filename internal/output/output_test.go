@@ -77,7 +77,7 @@ func TestBuildFileKeyOrderAndNullHandling(t *testing.T) {
 	atimeIdx := strings.Index(s, `"atime"`)
 	ctimeIdx := strings.Index(s, `"ctime"`)
 	birthtimeIdx := strings.Index(s, `"birthtime"`)
-	if !(mtimeIdx < atimeIdx && atimeIdx < ctimeIdx && ctimeIdx < birthtimeIdx) {
+	if mtimeIdx >= atimeIdx || atimeIdx >= ctimeIdx || ctimeIdx >= birthtimeIdx {
 		t.Errorf("expected key order mtime < atime < ctime < birthtime, got indices %d %d %d %d", mtimeIdx, atimeIdx, ctimeIdx, birthtimeIdx)
 	}
 

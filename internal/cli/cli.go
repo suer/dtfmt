@@ -14,7 +14,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 	fs := flag.NewFlagSet("dtfmt", flag.ContinueOnError)
 	fs.SetOutput(stderr)
 	fs.Usage = func() {
-		fmt.Fprintln(stderr, "usage: dtfmt <file-path|unix-timestamp|datetime-string>")
+		_, _ = fmt.Fprintln(stderr, "usage: dtfmt <file-path|unix-timestamp|datetime-string>")
 	}
 	if err := fs.Parse(args); err != nil {
 		return 2
@@ -29,7 +29,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 	arg := positional[0]
 	result, err := input.Detect(arg)
 	if err != nil {
-		fmt.Fprintln(stderr, "dtfmt: "+err.Error())
+		_, _ = fmt.Fprintln(stderr, "dtfmt: "+err.Error())
 		return 1
 	}
 
@@ -38,7 +38,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 	enc := json.NewEncoder(stdout)
 	enc.SetIndent("", "  ")
 	if err := enc.Encode(doc); err != nil {
-		fmt.Fprintln(stderr, "dtfmt: "+err.Error())
+		_, _ = fmt.Fprintln(stderr, "dtfmt: "+err.Error())
 		return 1
 	}
 	return 0
