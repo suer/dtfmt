@@ -9,8 +9,7 @@ import (
 )
 
 func Extract(fi os.FileInfo) Times {
-	mtime := fi.ModTime()
-	times := Times{Mtime: mtime, Atime: mtime}
+	times := baseTimes(fi)
 
 	st, ok := fi.Sys().(*syscall.Stat_t)
 	if !ok {
