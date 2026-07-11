@@ -24,7 +24,7 @@ dtfmt tries to interpret the argument in this order:
 
 1. **File path** — if it exists, outputs `mtime`/`atime`/`ctime`/`birthtime`. `ctime`/`birthtime` are OS-dependent; when unavailable the field is `null`.
 2. **Unix timestamp** — a numeric string; the unit (seconds/milliseconds/microseconds/nanoseconds) is guessed from its digit count.
-3. **Date/time string** — parsed via [araddon/dateparse](https://github.com/araddon/dateparse); timezone-less strings are interpreted as local time.
+3. **Date/time string** — parsed via [itlightning/dateparse](https://github.com/itlightning/dateparse); timezone-less strings are interpreted as local time.
 
 Each resolved time is expanded into unix formats (seconds/milliseconds/microseconds/nanoseconds) and named formats (RFC3339, RFC822, RFC1123, etc.), in both local time and UTC.
 
