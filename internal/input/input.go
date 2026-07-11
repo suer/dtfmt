@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/araddon/dateparse"
+	"github.com/itlightning/dateparse"
 )
 
 type Kind int
