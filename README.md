@@ -8,6 +8,12 @@ A CLI tool that guesses what kind of date/time value its argument is (file path,
 $ go install github.com/suer/dtfmt@latest
 ```
 
+Or install a prebuilt release binary via [mise](https://mise.jdx.dev/):
+
+```bash
+$ mise use -g github:suer/dtfmt
+```
+
 ## Usage
 
 ```bash
